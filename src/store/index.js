@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import domainReducer from '../components/domains/domainSlice'; 
+import domainReducer from '../feathers/domainSlice'; 
 
 export const store = configureStore({
   reducer: {

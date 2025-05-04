@@ -1,7 +1,6 @@
 import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { setSearchTerm } from "./domainSlice";
+import { setSearchTerm } from "../../feathers/domainSlice";
 
 const Search = () => {
   const dispatch = useDispatch();

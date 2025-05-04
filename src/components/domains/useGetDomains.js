@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getDomains } from "../../services/dashboardService";
 import { useDispatch } from "react-redux";
-import { setDomains } from "./domainSlice";
 import { useEffect } from "react";
+import { setDomains } from "../../feathers/domainSlice";
 
 const useGetDomains = () => {
   const dispatch = useDispatch();

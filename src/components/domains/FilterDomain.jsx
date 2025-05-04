@@ -1,6 +1,6 @@
 import { Select } from "antd";
 import { useDispatch } from "react-redux";
-import { setFilterStatus } from "./domainSlice";
+import { setFilterStatus } from "../../feathers/domainSlice";
 
 const FilterDomain = () => {
   const dispatch = useDispatch();
