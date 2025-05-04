@@ -11,13 +11,13 @@ const useAddDoamin = () => {
   } = useMutation({
     mutationFn: addDomain,
     onSuccess: () => {
-      console.log("object")
       queryClient.invalidateQueries({
         queryKey: ["domains-data"],
       });
     },
     onError: (err) => {
-      toast.error(err?.response.data.Message);
+      console.log(err.response.data.msg)
+      toast.error("Something went wrong. Please try again.");
     },
   });
   return { data, mutateAddDomain, isPending };

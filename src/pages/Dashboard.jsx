@@ -11,12 +11,12 @@ function Dashboard() {
   const [selectedDomain, setSelectedDomain] = useState(null);
 
   const showDrawer = () => {
-    setSelectedDomain(null); // حالت افزودن
+    setSelectedDomain(null); // for create
     setOpen(true);
   };
 
   const handleEdit = (domain) => {
-    setSelectedDomain(domain); // حالت ویرایش
+    setSelectedDomain(domain); // for edit
     setOpen(true);
   };
 
@@ -26,14 +26,14 @@ function Dashboard() {
 
   return (
     <div className="container xl:max-w-screen-xl mx-auto mt-7 ">
-      <div className="flex justify-between">
+      <div  className="flex justify-between shadow-sm p-10 border border-gray-100 rounded-md">
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover:cursor-pointer"
           onClick={showDrawer}
         >
           <span>+</span> <span>Add Domain</span>
         </button>
-        <div className="flex gap-4">
+        <div  className="flex gap-4">
           <FilterDomain />
           <Search />
         </div>

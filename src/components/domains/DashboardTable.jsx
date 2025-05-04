@@ -2,11 +2,24 @@ import React from "react";
 import { Table, Button } from "antd";
 import { useSelector } from "react-redux";
 import { formatDate } from "../../lib/formatDate";
-import { CheckCircleFilled, CheckCircleTwoTone, ExclamationCircleFilled, ExclamationCircleTwoTone, LinkOutlined } from "@ant-design/icons";
+import {
+  CheckCircleFilled,
+  CheckCircleTwoTone,
+  ExclamationCircleFilled,
+  ExclamationCircleTwoTone,
+  LinkOutlined,
+} from "@ant-design/icons";
 import useDeleteDomain from "./useDeleteDomain";
+import { Tag } from "antd";
 
 // ستون‌ها
 const columns = (handleDelete, handleEdit) => [
+  {
+    title: "#",
+    dataIndex: "index",
+    key: "index",
+    render: (_, __, index) => index + 1,
+  },
   {
     title: "Domain URL",
     dataIndex: "domain",
@@ -31,9 +44,9 @@ const columns = (handleDelete, handleEdit) => [
     key: "isActive",
     render: (isActive) =>
       isActive ? (
-        <span className="text-green-400 bold">Active</span>
+        <Tag color="#87d068">Active</Tag>
       ) : (
-        <span className="text-red-500 bold">Not Active</span>
+        <Tag color="#f50">Not Active</Tag>
       ),
   },
 
@@ -41,7 +54,30 @@ const columns = (handleDelete, handleEdit) => [
     title: "Verification Status",
     dataIndex: "status",
     key: "status",
+    render: (status) => {
+      let color;
+      switch (status) {
+        case "verified":
+          color = "green";
+          break;
+        case "pending":
+          color = "gold";
+          break;
+        case "rejected":
+          color = "red";
+          break;
+        default:
+          color = "default";
+      }
+
+      return (
+        <Tag color={color} className="font-medium capitalize">
+          {status}
+        </Tag>
+      );
+    },
   },
+
   {
     title: "Date",
     dataIndex: "createdDate",
@@ -53,18 +89,14 @@ const columns = (handleDelete, handleEdit) => [
     key: "actions",
     render: (_, record) => (
       <div className="flex gap-2 ">
-        <Button
-          type="primary"
-          size="small"
-          onClick={() => handleEdit(record)} // اصلاح id
-        >
+        <Button type="primary" size="small" onClick={() => handleEdit(record)}>
           Edit
         </Button>
         <Button
           danger
           size="small"
           className="!bg-red-400 !text-white"
-          onClick={() => handleDelete(record.id)} // اصلاح id
+          onClick={() => handleDelete(record.id)}
         >
           Delete
         </Button>
@@ -73,25 +105,26 @@ const columns = (handleDelete, handleEdit) => [
   },
 ];
 
-const DashboardTable = ({ domainsGetting,onEdit }) => {
+const DashboardTable = ({ domainsGetting, onEdit }) => {
   const domains = useSelector((state) => state.domain.filteredDomains);
-  const {mutateDeletetDomain}= useDeleteDomain();
+  const { mutateDeletetDomain } = useDeleteDomain();
+
   const handleDelete = (id) => {
-    mutateDeletetDomain(id)
+    mutateDeletetDomain(id);
   };
 
   const handleEdit = (domain) => {
-    onEdit(domain); 
+    onEdit(domain);
   };
 
   return (
     <Table
       columns={columns(handleDelete, handleEdit)}
       dataSource={domains}
-      rowKey="id" // اصلاح key
+      rowKey="id"
       pagination={true}
       bordered
-      loading={domainsGetting} // اضافه کردن بارگذاری
+      loading={domainsGetting}
       className="mt-20 rounded-md"
     />
   );

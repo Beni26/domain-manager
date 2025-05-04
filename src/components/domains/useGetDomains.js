@@ -7,17 +7,20 @@ import { useEffect } from "react";
 const useGetDomains = () => {
   const dispatch = useDispatch();
 
-  const { data, isLoading: domainsGetting, isSuccess } = useQuery({
+  const {
+    data,
+    isLoading: domainsGetting,
+    isSuccess,
+  } = useQuery({
     queryKey: ["domains-data"],
     queryFn: getDomains,
   });
 
-  // استفاده از useEffect برای dispatch کردن داده‌ها فقط در صورت موفقیت
   useEffect(() => {
     if (isSuccess) {
       dispatch(setDomains(data));
     }
-  }, [isSuccess, data, dispatch]); // فقط زمانی که isSuccess تغییر کرد، داده‌ها به redux ارسال می‌شود
+  }, [isSuccess, data, dispatch]);
 
   return { data, domainsGetting };
 };

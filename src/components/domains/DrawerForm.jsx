@@ -21,13 +21,12 @@ const DrawerForm = ({ open, onClose, selectedDomain }) => {
         status: selectedDomain.status,
       });
     } else {
-      form.resetFields(); // وقتی قراره فرم Add باشه، فرم پاک میشه
+      form.resetFields(); 
     }
   }, [selectedDomain, form]);
 
   const onFinish = (values) => {
     if (isEditMode) {
-      // فقط فیلدهای مورد نیاز برای Edit رو بفرست
       mutateeditDomain({
         data: {
           domain: values.domain,
@@ -70,7 +69,6 @@ const DrawerForm = ({ open, onClose, selectedDomain }) => {
           />
         </Form.Item>
 
-        {/* Verification Status فقط در حالت Add نمایش داده می‌شود */}
         {!isEditMode && (
           <Form.Item
             label="Verification Status"
