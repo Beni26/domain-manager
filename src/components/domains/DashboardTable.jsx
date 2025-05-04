@@ -32,7 +32,15 @@ const columns = (handleDelete, handleEdit) => [
           <ExclamationCircleFilled className="!text-red-400" />
         )}
         {record.domain}
-        <a href={record.domain} target="_blank" rel="noopener noreferrer">
+        <a
+          href={
+            record.domain.startsWith("http")
+              ? record.domain
+              : `http://${record.domain}`
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <LinkOutlined />
         </a>
       </b>
